@@ -14,7 +14,6 @@ void GameData::retrieveClientInstance() {
 		if (sigOffset != 0x0) {
 			int offset = *reinterpret_cast<int*>((sigOffset + 3));                                                 // Get Offset from code
 			clientInstanceOffset = sigOffset - g_Data.gameModule->ptrBase + offset + /*length of instruction*/ 7;  // Offset is relative
-			logF("clinet: %llX", clientInstanceOffset);
 		}
 	}
 	g_Data.clientInstance = reinterpret_cast<C_ClientInstance*>(g_Data.slimMem->ReadPtr<uintptr_t*>(g_Data.gameModule->ptrBase + clientInstanceOffset, {0x0, 0x0, 0x380, 0x10}));
@@ -57,7 +56,6 @@ bool GameData::isKeyDown(int key) {
 		if (sigOffset != 0x0) {
 			int offset = *reinterpret_cast<int*>((sigOffset + 3));                                         // Get Offset from code
 			keyMapOffset = sigOffset - g_Data.gameModule->ptrBase + offset + /*length of instruction*/ 7;  // Offset is relative
-			logF("KeyMap: %llX", keyMapOffset + g_Data.gameModule->ptrBase);
 		}
 	}
 	// All keys are mapped as bools, though aligned as ints (4 byte)
@@ -197,7 +195,7 @@ void GameData::forEachEntity(std::function<void(C_Entity*, bool)> callback) {
 		C_EntityList* entList = g_Data.getEntityList();
 		if (entList == 0) {
 #ifdef _DEBUG
-			logF("EntityList broken btw");
+			logF("Welcome to Fadeaway by MidnightAura");
 #endif
 		} else {
 			size_t listSize = entList->getListSize();
@@ -233,16 +231,6 @@ void GameData::initGameData(const SlimUtils::SlimModule* gameModule, SlimUtils::
 	g_Data.hDllInst = hDllInst;
 	g_Data.networkedData.xorKey = rand() % 0xFFFF | ((rand() % 0xFFFF) << 16);
 	retrieveClientInstance();
-#ifdef _DEBUG
-	logF("base: %llX", g_Data.getModule()->ptrBase);
-	logF("clientInstance %llX", g_Data.clientInstance);
-	logF("localPlayer %llX", g_Data.getLocalPlayer());
-	if (g_Data.clientInstance != nullptr){
-		logF("minecraftGame: %llX", g_Data.clientInstance->minecraftGame);
-		logF("levelRenderer: %llX", g_Data.clientInstance->levelRenderer);
-	}
-
-#endif
 }
 void GameData::sendPacketToInjector(HorionDataPacket horionDataPack) {
 	if (!isInjectorConnectionActive())

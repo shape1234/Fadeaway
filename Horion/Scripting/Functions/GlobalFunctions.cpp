@@ -20,7 +20,5 @@ JsValueRef CALLBACK GlobalFunctions::log(JsValueRef callee, bool isConstructCall
 		strstream << string;
 	}
 
-	logF("Script: %S", strstream.str().c_str());
-
 	return JS_INVALID_REFERENCE;
 }

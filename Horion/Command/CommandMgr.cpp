@@ -12,7 +12,6 @@ CommandMgr::~CommandMgr() {
 }
 
 void CommandMgr::initCommands() {
-	logF("Initializing commands");
 
 	commandList.push_back(new EjectCommand());
 	commandList.push_back(new TeleportCommand());

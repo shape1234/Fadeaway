@@ -9,7 +9,6 @@ TextHolder styledReturnText;
 //#define TEST_DEBUG
 
 void Hooks::Init() {
-	logF("Setting up Hooks...");
 	// clang-format off
 	// Vtables
 	{
@@ -1117,7 +1116,6 @@ void Hooks::LoopbackPacketSender_sendToServer(C_LoopbackPacketSender* a, C_Packe
 		auto varInt = reinterpret_cast<__int64*>(reinterpret_cast<__int64>(packet) + 0x28);
 		auto text = reinterpret_cast<TextHolder*>(reinterpret_cast<__int64>(packet) + 0x30);
 		auto bet = reinterpret_cast<unsigned char*>(reinterpret_cast<__int64>(packet) + 0x50);
-		logF("emote %llX %s %i", *varInt, text->getText(), *bet);
 	}
 
 	oFunc(a, packet);
@@ -1151,7 +1149,6 @@ float Hooks::LevelRendererPlayer_getFov(__int64 _this, float a2, bool a3) {
 		return oGetFov(_this, a2, a3);
 	}
 #ifdef _DEBUG
-	logF("LevelRendererPlayer_getFov Return Address: %llX", _ReturnAddress());
 	__debugbreak();  // IF we reach here, a sig is broken
 #endif
 	return oGetFov(_this, a2, a3);
@@ -1442,7 +1439,6 @@ __int64 Hooks::ConnectionRequest_create(__int64 _this, __int64 privateKeyManager
 	auto geoOverride = g_Data.getCustomGeoOverride();
 
 	if (g_Data.allowWIPFeatures()) {
-		logF("Connection Request: InputMode: %i UiProfile: %i GuiScale: %i", inputMode, uiProfile, guiScale);
 
 		//Logger::WriteBigLogFileF(skinGeometryData->getTextLength() + 20, "Geometry: %s", skinGeometryData->getText());
 		auto hResourceGeometry = FindResourceA((HMODULE)g_Data.getDllModule(), MAKEINTRESOURCEA(IDR_TEXT1), "TEXT");

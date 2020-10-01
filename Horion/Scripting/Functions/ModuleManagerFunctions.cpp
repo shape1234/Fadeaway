@@ -171,8 +171,6 @@ JsValueRef CALLBACK ModuleManagerFunctions::JsModule_registerCallback(JsValueRef
 	if (!funcOpt.has_value()) {
 		THROW(L"Invalid callback function specified");
 	}
-
-	logF("name: %s", jsMod->getModuleName());
 	auto weakPtr = jsMod->getBackingScriptModule();
 	auto ptr = weakPtr.lock();
 	if (!ptr) {
@@ -182,8 +180,6 @@ JsValueRef CALLBACK ModuleManagerFunctions::JsModule_registerCallback(JsValueRef
 	if (!ptr->registerCallback(callbackNameOpt.value(), funcOpt.value())) {
 		THROW(L"Invalid callback name");
 	}
-
-	logF("Callback registered");
 
 	return chakra.trueValue();
 }

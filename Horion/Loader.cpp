@@ -75,7 +75,6 @@ DWORD WINAPI keyThread(LPVOID lpParam) {
 
 		Sleep(2);
 	}
-	logF("Stopping Threads...");
 	GameData::terminate();
 	Sleep(200);  // Give the threads a bit of time to exit
 
@@ -83,7 +82,6 @@ DWORD WINAPI keyThread(LPVOID lpParam) {
 }
 
 DWORD WINAPI injectorConnectionThread(LPVOID lpParam) {
-	logF("Injector Connection Thread started");
 
 	struct MemoryBoi {
 		short protocolVersion;
@@ -101,8 +99,6 @@ DWORD WINAPI injectorConnectionThread(LPVOID lpParam) {
 	char* magicArray = new char[sizeof(magicValues) + sizeof(uintptr_t) * 2];
 	memcpy(magicArray, magicValues, sizeof(magicValues));
 
-	logF("Magic array at %llX", magicArray);
-
 	auto** horionToInjectorPtr = reinterpret_cast<MemoryBoi**>(magicArray + sizeof(magicValues));
 	auto** injectorToHorionPtr = reinterpret_cast<MemoryBoi**>(magicArray + sizeof(magicValues) + sizeof(uintptr_t));
 
@@ -115,9 +111,6 @@ DWORD WINAPI injectorConnectionThread(LPVOID lpParam) {
 	MemoryBoi* injectorToHorion = *injectorToHorionPtr;
 
 	magicArray[0] = 0x48;  //Only find this allocated one, not the one in the thread stack
-
-	logF("horionToInjectorPtr at %llX", horionToInjector);
-	logF("injectorToHorionPtr at %llX", injectorToHorion);
 
 	LARGE_INTEGER frequency, timeSinceLastMessage, timeSinceLastPing;
 	QueryPerformanceFrequency(&frequency);
@@ -137,7 +130,6 @@ DWORD WINAPI injectorConnectionThread(LPVOID lpParam) {
 			float realElapsed = (float)elapsed / frequency.QuadPart;
 			if (realElapsed > 4.f) {
 				isConnected = false;
-				logF("Disconnected from injector due to timeout");
 				injectorToHorion->isPresent = false;
 				QueryPerformanceCounter(&timeSinceLastMessage);
 			}
@@ -162,14 +154,12 @@ DWORD WINAPI injectorConnectionThread(LPVOID lpParam) {
 				QueryPerformanceCounter(&timeSinceLastMessage);
 				switch (injectorToHorion->cmd) {
 				case CMD_INIT: {
-					logF("Got CMD_INIT from injector");
 					loggedIn = true;
 					int flags = injectorToHorion->params[0];
 					if (flags & (1 << 0) && injectorToHorion->dataSize > 0 && injectorToHorion->dataSize < sizeof(injectorToHorion->data)) {  // Has Json data
 						injectorToHorion->data[sizeof(injectorToHorion->data) - 1] = '\0';
 						json data = json::parse(reinterpret_cast<char*>(injectorToHorion->data));
 						if (data.at("discordAuth").is_string() && data.at("serial").is_number_integer()) {
-							logF("Got api token from injector");
 							auto serialNum = data.at("serial").get<unsigned int>();
 							if (serialNum == 0) {
 								logF("Serial is null!");
@@ -309,7 +299,6 @@ DWORD WINAPI injectorConnectionThread(LPVOID lpParam) {
 		} else
 			Sleep(30);
 	}
-	logF("Quitting connection thread");
 	horionToInjector->isPresent = false;
 	memset(magicValues, 0, sizeof(magicValues));
 	memset(magicArray, 0, sizeof(magicValues) + sizeof(uintptr_t) * 2);
@@ -326,12 +315,9 @@ DWORD WINAPI injectorConnectionThread(LPVOID lpParam) {
 #endif
 
 DWORD WINAPI start(LPVOID lpParam) {
-	logF("Starting up...");
-	logF("MSC v%i at %s", _MSC_VER, __TIMESTAMP__);
 
 	DWORD conThread;
 	CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)injectorConnectionThread, lpParam, NULL, &conThread);
-	logF("InjCon: %i", conThread);
 	init();
 
 	DWORD procId = GetCurrentProcessId();
@@ -350,28 +336,20 @@ DWORD WINAPI start(LPVOID lpParam) {
 
 	DWORD keyThreadId;
 	CreateThread(nullptr, NULL, (LPTHREAD_START_ROUTINE)keyThread, lpParam, NULL, &keyThreadId);  // Checking Keypresses
-	logF("KeyT: %i", keyThreadId);
-
-	logF("Waiting for injector");
 	while (!g_Data.isInjectorConnectionActive()) {
 		Sleep(10);
 		if (!isRunning)
 			ExitThread(0);
 	}
-	logF("Injector found");
 
 	cmdMgr->initCommands();
-	logF("Initialized command manager (1/3)");
 	moduleMgr->initModules();
-	logF("Initialized module manager (2/3)");
 	configMgr->init();
-	logF("Initialized config manager (3/3)");
 
 	Hooks::Enable();
 	TabGui::init();
 	ClickGui::init();
 
-	logF("Hooks enabled");
 
 	std::thread countThread([] {
 		while (isRunning) {
@@ -386,7 +364,6 @@ DWORD WINAPI start(LPVOID lpParam) {
 	});
 	countThread.detach();
 
-	logF("Count thread started");
 
 	ExitThread(0);
 }
@@ -409,7 +386,6 @@ BOOL __stdcall DllMain(HMODULE hModule,
 		Hooks::Restore();
 		//GameWnd.OnDeactivated();
 
-		logF("Removing logger");
 		Logger::Disable();
 
 		MH_Uninitialize();

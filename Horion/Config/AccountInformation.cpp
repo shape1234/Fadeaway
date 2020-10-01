@@ -54,8 +54,7 @@ bool AccountInformation::verify() {
 
 			isValid = true;
 			return true;
-		} else
-			logF("Account is a guest account");
+		}
 	}
 
 	return false;
