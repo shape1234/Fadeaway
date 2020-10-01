@@ -7,9 +7,9 @@ public:
 
 	bool smooth = true;
 	bool zooming = false;
-	float strength = 20.f;
-	float target = 20.f;
-	float modifier = 20.f;
+	float strength = 78.f;
+	float target = 78.f;
+	float modifier = 78.f;
 
 	// Inherited via IModule
 	virtual bool isFlashMode() override;
