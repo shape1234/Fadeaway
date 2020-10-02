@@ -90,7 +90,7 @@ void CommandMgr::execute(char* message) {
 			}
 		}
 
-		g_Data.getClientInstance()->getGuiData()->displayClientMessageF("[%sHorion%s] %sCommand '%s' could not be found!", GOLD, WHITE, RED, cmd.c_str());
+		g_Data.getClientInstance()->getGuiData()->displayClientMessageF("[%sFadeaway%s] %sCommand '%s' could not be found!", GOLD, WHITE, RED, cmd.c_str());
 	}
 }
 
