@@ -36,6 +36,7 @@ const char* HiveFly::getModuleName() {
 void HiveFly::onTick(C_GameMode* gm) {
 	float calcYaw = (gm->player->yaw + 90) * (PI / 180);
 	float calcPitch = (gm->player->pitch) * -(PI / 180);
+	float calcYawRev = (gm->player->yaw - 90) * (PI / 180);
 
 	if (!isBypass) {
 		vec3_t moveVec;
@@ -46,30 +47,20 @@ void HiveFly::onTick(C_GameMode* gm) {
 		gm->player->lerpMotion(moveVec);
 	} else {
 		delay++;
+		vec3_t moveVec;
+		moveVec.x = cos(calcYaw) * speedMod;
+		moveVec.y = -0.001 * speedMod;
+		moveVec.z = sin(calcYaw) * speedMod;
 
-		if (delay >= 5) {
-			vec3_t pos = *g_Data.getLocalPlayer()->getPos();
-			C_MovePlayerPacket a(g_Data.getLocalPlayer(), pos);
-			g_Data.getClientInstance()->loopbackPacketSender->sendToServer(&a);
-			pos.y -= 0.35f;
-			a = C_MovePlayerPacket(g_Data.getLocalPlayer(), pos);
-			g_Data.getClientInstance()->loopbackPacketSender->sendToServer(&a);
+		gm->player->lerpMotion(moveVec);
 
-			gm->player->velocity.y = 0.465f;
+		if (delay >= 15) {
 			vec3_t moveVec;
-			moveVec.x = cos(calcYaw) * cos(calcPitch) * speedMod;
-			moveVec.z = sin(calcYaw) * cos(calcPitch) * speedMod;
+			moveVec.x = (cos(calcYawRev) * speedMod) / 3;
+			moveVec.y = +0.0005 * speedMod;
+			moveVec.z = (sin(calcYawRev) * speedMod) / 3;
 
-			gm->player->velocity.x = moveVec.x;
-			gm->player->velocity.z = moveVec.z;
-
-			float teleportX = cos(calcYaw) * cos(calcPitch) * -0.00000005f;
-			float teleportZ = sin(calcYaw) * cos(calcPitch) * -0.00000005f;
-
-			pos = *gm->player->getPos();
-			g_Data.getLocalPlayer()->setPos(vec3_t(pos.x + teleportX, pos.y - 0.15f, pos.z + teleportZ));
-
-			gm->player->velocity.y -= 0.15f;
+			gm->player->lerpMotion(moveVec);
 			delay = 0;
 		}
 	}
