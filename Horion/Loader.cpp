@@ -11,7 +11,6 @@ bool isRunning = true;
 #endif
 
 DWORD WINAPI keyThread(LPVOID lpParam) {
-	logF("Key thread started");
 
 	bool* keyMap = static_cast<bool*>(malloc(0xFF * 4 + 0x4));
 	if (keyMap == nullptr)

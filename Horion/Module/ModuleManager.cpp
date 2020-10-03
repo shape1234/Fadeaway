@@ -52,6 +52,7 @@ void ModuleManager::initModules() {
 		this->moduleList.push_back(std::shared_ptr<IModule>(new ChestStealer()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Fly()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new HiveFly()));
+		this->moduleList.push_back(std::shared_ptr<IModule>(new MineplexFly()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Hitbox()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Reach()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new FullBright()));

@@ -3,7 +3,7 @@
 
 #include "../../../SDK/CCamera.h"
 
-Tracer::Tracer() : IModule('R', Category::VISUAL, "Draws lines to ESP highlighted entities") {
+Tracer::Tracer() : IModule(0x0, Category::VISUAL, "Draws lines to ESP highlighted entities") {
 }
 
 Tracer::~Tracer() {

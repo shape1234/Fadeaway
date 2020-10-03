@@ -39,6 +39,7 @@
 #include "Modules/FastLadder.h"
 #include "Modules/Fly.h"
 #include "Modules/HiveFly.h"
+#include "Modules/MineplexFly.h"
 #include "Modules/Freecam.h"
 #include "Modules/FullBright.h"
 #include "Modules/Glide.h"

@@ -35,7 +35,6 @@ bool AccountInformation::verify() {
 	client.SetTimeouts(1500, 3000, 2000, 3000);
 	bool boi = client.SendHttpRequest();
 	if (!boi) {
-		logF("Account verification failed, %d", client.GetLastError());
 		return false;
 	}
 
@@ -46,7 +45,6 @@ bool AccountInformation::verify() {
 		nlohmann::json data = nlohmann::json::parse(content);
 
 		if (data.contains("status") && data["status"].is_string() && data["status"].get<std::string>() == "success") {
-			logF("Account verified");
 
 			// evade and deceive
 			g_Data.networkedData.localPlayerOffset = data["serverTime"].get<int>(); 
