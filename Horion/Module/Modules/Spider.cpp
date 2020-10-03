@@ -1,6 +1,6 @@
 #include "Spider.h"
 
-Spider::Spider() : IModule('Z', Category::MOVEMENT, "Climb walls") {
+Spider::Spider() : IModule(0x0, Category::MOVEMENT, "Climb walls") {
 	registerFloatSetting("Speed", &speed, speed, 0.1, 1);
 }
 
