@@ -1,17 +1,17 @@
-#include "Bhop.h"
+#include "Strafe.h"
 
-Bhop::Bhop() : IModule('X', Category::MOVEMENT, "Hop around like a bunny!") {
-	registerFloatSetting("Speed", &this->speed, this->speed, 0.1f, 0.8f);
+Strafe::Strafe() : IModule(0x0, Category::MOVEMENT, "Bhop Without the Jump, Can be used as some kind of Speedhack.") {
+	registerFloatSetting("Speed", &this->speed, this->speed, 0.1f, 0.325f);
 }
 
-Bhop::~Bhop() {
+Strafe::~Strafe() {
 }
 
-const char* Bhop::getModuleName() {
-	return ("Bhop");
+const char* Strafe::getModuleName() {
+	return ("Strafe");
 }
 
-void Bhop::onMove(C_MoveInputHandler* input) {
+void Strafe::onMove(C_MoveInputHandler* input) {
 	auto player = g_Data.getLocalPlayer();
 	if (player == nullptr) return;
 
@@ -27,9 +27,6 @@ void Bhop::onMove(C_MoveInputHandler* input) {
 
 	if (input->forward && input->backward)
 		return;
-
-	if (player->onGround && pressed)
-		player->jumpFromGround();
 	
 	if (input->right) {
 		yaw += 90.f;

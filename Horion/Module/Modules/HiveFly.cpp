@@ -1,4 +1,5 @@
 #include "HiveFly.h"
+#include "../../Module/ModuleManager.h"
 
 HiveFly::HiveFly() : IModule('Z', Category::MOVEMENT, "Flight bypass for Hive, 0.7 recommended") {
 	registerFloatSetting("speed", &this->speedMod, 1, 0.3f, 2.5f);
@@ -27,6 +28,12 @@ void HiveFly::onEnable() {
 	moveVec.y = +0.5;
 	vec3_t pos = *g_Data.getLocalPlayer()->getPos();
 	g_Data.getLocalPlayer()->setPos(vec3_t(pos.x + teleportX, pos.y + 0.5f, pos.z + teleportZ));
+
+	auto StrafeMod = moduleMgr->getModule<Strafe>();
+	if (StrafeMod->isEnabled()) {
+		StrafeMod->setEnabled(false);
+	} else {
+	}
 }
 
 const char* HiveFly::getModuleName() {
@@ -34,6 +41,7 @@ const char* HiveFly::getModuleName() {
 }
 
 void HiveFly::onTick(C_GameMode* gm) {
+
 	float calcYaw = (gm->player->yaw + 90) * (PI / 180);
 	float calcPitch = (gm->player->pitch) * -(PI / 180);
 	float calcYawRev = (gm->player->yaw - 90) * (PI / 180);

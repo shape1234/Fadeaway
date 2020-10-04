@@ -93,6 +93,7 @@
 #include "Modules/NoPaintingCrash.h"
 #include "Modules/Spider.h"
 #include "Modules/Compass.h"
+#include "Modules/Strafe.h"
 
 #ifdef _DEBUG
 #include "Modules/PacketLogger.h"
