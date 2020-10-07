@@ -1,6 +1,6 @@
 #include "DupeCommand.h"
 
-DupeCommand::DupeCommand() : IMCCommand("dupe", "Duplicates the item in hand", "") {
+DupeCommand::DupeCommand() : IMCCommand("dupe", "Duplicates the item in hand for Nukkit Servers", "") {
 }
 
 DupeCommand::~DupeCommand() {

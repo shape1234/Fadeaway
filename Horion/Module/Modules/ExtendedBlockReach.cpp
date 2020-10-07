@@ -8,5 +8,5 @@ ExtendedBlockReach::~ExtendedBlockReach() {
 }
 
 const char* ExtendedBlockReach::getModuleName() {
-	return ("InfiniteBlockReach");
+	return ("ExtendedBlockReach");
 }
