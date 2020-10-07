@@ -25,4 +25,11 @@ This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 I
 You are allowed to fork the project and distribute it, if you give credit. You may not sell any code protected by the license.
 Not all source files are protected by this license - Some third party libraries (Chakra, DX11) may be under different copyright.
 
-**Fadeaway** is a modified horion with a different color and module values.
+**Fadeaway** is a modified horion with more modules, a different color, and some changes to module values. All to bring out the epic gamer within you.
+
+
+**Credits:**
+* Horion Staff Team (Making Horion open-source, most code by them)
+* eKowz (Telling me how to make it work without the injector)
+* Vega (First forker, Encouragement)
+* Knight (Encouragement)
