@@ -16,6 +16,7 @@ private:
 public:
 	bool isMobAura = false;
 	bool hurttime = true;
+	bool cps = false;
 	float range = 6;
 
 

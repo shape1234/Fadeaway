@@ -8,6 +8,7 @@ Killaura::Killaura() : IModule('P', Category::COMBAT, "Attacks entities around y
 	this->registerBoolSetting("hurttime", &this->hurttime, this->hurttime);
 	this->registerBoolSetting("AutoWeapon", &this->autoweapon, this->autoweapon);
 	this->registerBoolSetting("Silent Rotations", &this->silent, this->silent);
+	this->registerBoolSetting("Double CPS", &this->cps, this->cps);
 }
 
 Killaura::~Killaura() {
@@ -101,6 +102,24 @@ void Killaura::onTick(C_GameMode* gm) {
 			}
 		} else {
 			if (!(targetList[0]->damageTime > 1 && hurttime)) {
+				g_Data.getLocalPlayer()->swing();
+				g_Data.getCGameMode()->attack(targetList[0]);
+			}
+		}
+
+		if (isMulti && cps) {
+			for (auto& i : targetList) {
+				if (!(i->damageTime > 1 && hurttime)) {
+					g_Data.getLocalPlayer()->swing();
+					g_Data.getCGameMode()->attack(i);
+					g_Data.getLocalPlayer()->swing();
+					g_Data.getCGameMode()->attack(i);
+				}
+			}
+		} else {
+			if (!(targetList[0]->damageTime > 1 && hurttime && cps)) {
+				g_Data.getLocalPlayer()->swing();
+				g_Data.getCGameMode()->attack(targetList[0]);
 				g_Data.getLocalPlayer()->swing();
 				g_Data.getCGameMode()->attack(targetList[0]);
 			}

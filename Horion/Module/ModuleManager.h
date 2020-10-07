@@ -81,6 +81,7 @@
 #include "Modules/NightMode.h"
 #include "Modules/NoSwing.h"
 #include "Modules/CubeGlide.h"
+#include "Modules/CubeSpeed.h"
 #include "Modules/AirStuck.h"
 #include "Modules/Zoom.h"
 #include "Modules/Teams.h"

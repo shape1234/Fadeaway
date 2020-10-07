@@ -19,6 +19,7 @@ void ModuleManager::initModules() {
 		auto lock = this->lockModuleListExclusive();
 
 		this->moduleList.push_back(std::shared_ptr<IModule>(new HudModule()));
+		this->moduleList.push_back(std::shared_ptr<IModule>(new AutoGapple()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Killaura()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new ESP()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Jetpack()));
@@ -86,11 +87,12 @@ void ModuleManager::initModules() {
 		this->moduleList.push_back(std::shared_ptr<IModule>(new NightMode()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new NoSwing()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new CubeGlide()));
+		this->moduleList.push_back(std::shared_ptr<IModule>(new CubeSpeed()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new AirStuck()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Zoom()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Teams()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Nbt()));
-		//this->moduleList.push_back(std::shared_ptr<IModule>(new Godmode()));
+		this->moduleList.push_back(std::shared_ptr<IModule>(new Godmode()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Freelook()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new AutoSneak()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new NoHurtcam()));
