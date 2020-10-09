@@ -361,6 +361,8 @@
     <ClCompile Include="Horion\Module\Modules\Xray.cpp" />
     <ClCompile Include="Horion\Module\Modules\Zoom.cpp" />
     <ClCompile Include="Horion\Module\Modules\Strafe.cpp" />
+    <ClCompile Include="Horion\Module\Modules\Switcher.cpp" />
+    <ClCompile Include="Horion\Module\Modules\Longjump.cpp" />
     <ClCompile Include="Horion\path\goals\JoeGoal.cpp" />
     <ClCompile Include="Horion\path\goals\JoeGoalXYZ.cpp" />
     <ClCompile Include="Horion\path\goals\JoeGoalXZ.cpp" />
@@ -540,6 +542,8 @@
     <ClInclude Include="Horion\Module\Modules\Xray.h" />
     <ClInclude Include="Horion\Module\Modules\Zoom.h" />
     <ClInclude Include="Horion\Module\Modules\Strafe.h" />
+    <ClInclude Include="Horion\Module\Modules\Switcher.h" />
+    <ClInclude Include="Horion\Module\Modules\Longjump.h" />
     <ClInclude Include="Horion\path\goals\JoeGoal.h" />
     <ClInclude Include="Horion\path\goals\JoeGoalXYZ.h" />
     <ClInclude Include="Horion\path\goals\JoeGoalXZ.h" />

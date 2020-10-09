@@ -6,6 +6,7 @@ private:
 	bool onlyHand = false;
 	bool bypass = false;
 	bool shouldTP = false;
+	bool packetmode = false;
 	vec3_t tpPos;
 
 public:

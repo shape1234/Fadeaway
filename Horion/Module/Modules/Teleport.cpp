@@ -1,8 +1,9 @@
 #include "Teleport.h"
 
-Teleport::Teleport() : IModule(0x0, Category::MISC, "Click a block to teleport to it") {
+Teleport::Teleport() : IModule('L', Category::MISC, "Click a block to teleport to it") {
 	registerBoolSetting("Only Hand", &this->onlyHand, this->onlyHand);
 	registerBoolSetting("Push", &this->bypass, this->bypass);
+	registerBoolSetting("PacketMove", &this->packetmode, this->packetmode);
 }
 
 Teleport::~Teleport() {
@@ -13,12 +14,11 @@ const char* Teleport::getModuleName() {
 }
 
 void Teleport::onTick(C_GameMode* gm) {
+	if (!GameData::canUseMoveKeys())
+		return;
+	if (onlyHand && g_Data.getLocalPlayer()->getSupplies()->inventory->getItemStack(g_Data.getLocalPlayer()->getSupplies()->selectedHotbarSlot)->item != nullptr)
+		return;
 
-	if (!GameData::canUseMoveKeys()) 
-		return;
-	if (onlyHand && g_Data.getLocalPlayer()->getSupplies()->inventory->getItemStack(g_Data.getLocalPlayer()->getSupplies()->selectedHotbarSlot)->item != nullptr) 
-		return;
-	
 	if (GameData::isRightClickDown() && !hasClicked) {
 		hasClicked = true;
 
@@ -33,7 +33,7 @@ void Teleport::onTick(C_GameMode* gm) {
 
 		g_Data.getGuiData()->displayClientMessageF("%sTeleport position set to %sX: %.1f Y: %.1f Z: %.1f%s. Sneak to teleport!", GREEN, GRAY, pos.x, pos.y, pos.z, GREEN);
 	}
-	if (!GameData::isRightClickDown()) 
+	if (!GameData::isRightClickDown())
 		hasClicked = false;
 
 	if (shouldTP && gm->player->isSneaking()) {
@@ -49,8 +49,22 @@ void Teleport::onTick(C_GameMode* gm) {
 			gm->player->setPos(tpPos);*/
 			float dist = gm->player->getPos()->dist(tpPos);
 			g_Data.getLocalPlayer()->lerpTo(tpPos, vec2_t(1, 1), (int)fmax((int)dist * 0.1, 1));
-		}
-		else gm->player->setPos(tpPos);
+		} else
+			gm->player->setPos(tpPos);
+		shouldTP = false;
+	}
+	if (shouldTP && gm->player->isSneaking()) {
+		tpPos.y += (gm->player->getPos()->y - gm->player->getAABB()->lower.y) + 1;
+		if (packetmode) {
+			int dist = (int)gm->player->getPos()->dist(tpPos);
+			int i = (int)dist / 5;
+			for (int n = 0; n < i; n++) {
+				vec3_t offs = tpPos.sub(*gm->player->getPos()).div(i).mul(n);
+				C_MovePlayerPacket p = C_MovePlayerPacket(g_Data.getLocalPlayer(), gm->player->getPos()->add(offs));
+				g_Data.getClientInstance()->loopbackPacketSender->sendToServer(&p);
+			}
+		} else
+			gm->player->setPos(tpPos);
 		shouldTP = false;
 	}
 }

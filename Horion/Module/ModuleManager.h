@@ -95,6 +95,8 @@
 #include "Modules/Spider.h"
 #include "Modules/Compass.h"
 #include "Modules/Strafe.h"
+#include "Modules/Switcher.h"
+#include "Modules/Longjump.h"
 
 #ifdef _DEBUG
 #include "Modules/PacketLogger.h"

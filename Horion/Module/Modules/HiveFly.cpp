@@ -65,7 +65,7 @@ void HiveFly::onTick(C_GameMode* gm) {
 		if (delay >= 15) {
 			vec3_t moveVec;
 			moveVec.x = (cos(calcYawRev) * speedMod) / 3;
-			moveVec.y = +0.0005 * speedMod;
+			moveVec.y = -0.0005 * speedMod;
 			moveVec.z = (sin(calcYawRev) * speedMod) / 3;
 
 			gm->player->lerpMotion(moveVec);
