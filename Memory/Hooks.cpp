@@ -621,7 +621,7 @@ __int64 Hooks::RenderText(__int64 a1, C_MinecraftUIRenderContext* renderCtx) {
 
 					static std::string name = "Fadeaway";
 #ifdef _DEBUG
-					static std::string version = "B 0.8";
+					static std::string version = "B 0.8.1";
 #elif defined _BETA
 					static std::string version = "beta";
 #else

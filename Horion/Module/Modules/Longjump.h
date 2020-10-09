@@ -5,7 +5,6 @@ class Longjump : public IModule {
 private:
 	int delay = 0;
 	int hasJumped = 0;
-	bool isBypass = false;
 	float speedMod = 1;
 	float upvel = 0.35f;
 
