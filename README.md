@@ -29,7 +29,7 @@ Not all source files are protected by this license - Some third party libraries 
 
 
 **Credits:**
-* Horion Staff Team (Making Horion open-source, most code by them)
+* Horion Dev Team (Making Horion open-source, most code by them)
 * eKowz (Telling me how to make it work without the injector)
 * Vega (First forker, Encouragement)
 * Knight (Encouragement)
