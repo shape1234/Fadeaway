@@ -7,6 +7,9 @@ private:
 	int hasJumped = 0;
 	float speedMod = 1;
 	float upvel = 0.35f;
+	bool isBypass = false;
+	bool yoight = false;
+	int doot = 0;
 
 public:
 	C_MovePlayerPacket* jetpack = nullptr;

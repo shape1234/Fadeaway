@@ -2,7 +2,8 @@
 
 class Switcher : public IModule {
 private:
-	bool ternary = false;
+	int ternary = false;
+	int ternary1 = false;
 
 public:
 	Switcher();
