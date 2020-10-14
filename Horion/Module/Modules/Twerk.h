@@ -1,14 +1,14 @@
-
 #include "Module.h"
-class FastEat : public IModule {
+class Twerk : public IModule {
 private:
-	int dur = 5;
+	bool extra = false;
+	int delay1 = 2;
+	int delay = 0;
 
 public:
-	FastEat();
-	~FastEat();
+	Twerk();
+	~Twerk();
 
-	// Inherited via IModule
 	virtual const char* getModuleName() override;
 	virtual void onTick(C_GameMode* gm) override;
 	virtual void onDisable() override;

@@ -104,6 +104,7 @@ void ModuleManager::initModules() {
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Strafe()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Switcher()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Longjump()));
+		this->moduleList.push_back(std::shared_ptr<IModule>(new Twerk()));
 
 		this->moduleList.push_back(std::shared_ptr<IModule>(new FollowPathModule()));
 

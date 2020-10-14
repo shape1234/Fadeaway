@@ -57,6 +57,9 @@ void InfiniteReach::onTick(C_GameMode* gm) {
 
 		float teleportX = cos(calcYaw) * cos(calcPitch) * 3.5f;
 		float teleportZ = sin(calcYaw) * cos(calcPitch) * 3.5f;
+
+		float teleportX1 = 0.0f;
+		float teleportZ1 = 0.0f;
 		C_MovePlayerPacket teleportPacket;
 
 		if (strcmp(g_Data.getRakNetInstance()->serverIp.getText(), "mco.cubecraft.net") == 0) {
@@ -83,11 +86,11 @@ void InfiniteReach::onTick(C_GameMode* gm) {
 			}
 		} else {
 			vec3_t pos = *targetList0[0]->getPos();
-			teleportPacket = C_MovePlayerPacket(g_Data.getLocalPlayer(), vec3_t(pos.x - teleportX, pos.y, pos.z - teleportZ));
+			teleportPacket = C_MovePlayerPacket(g_Data.getLocalPlayer(), vec3_t(pos.x - teleportX1, pos.y, pos.z - teleportZ1));
 			g_Data.getClientInstance()->loopbackPacketSender->sendToServer(&teleportPacket);
 			g_Data.getCGameMode()->attack(targetList0[0]);
-			teleportPacket = C_MovePlayerPacket(g_Data.getLocalPlayer(), *g_Data.getLocalPlayer()->getPos());
-			g_Data.getClientInstance()->loopbackPacketSender->sendToServer(&teleportPacket);
+			//teleportPacket = C_MovePlayerPacket(g_Data.getLocalPlayer(), *g_Data.getLocalPlayer()->getPos());
+			//g_Data.getClientInstance()->loopbackPacketSender->sendToServer(&teleportPacket);
 		}
 		Odelay = 0;
 	}

@@ -1,7 +1,7 @@
 #include "Strafe.h"
 
 Strafe::Strafe() : IModule(0x0, Category::MOVEMENT, "Bhop Without the Jump, Can be used as some kind of Speedhack.") {
-	registerFloatSetting("Speed", &this->speed, this->speed, 0.1f, 0.325f);
+	registerFloatSetting("Speed", &this->speed, this->speed, 0.1f, 1.f);
 }
 
 Strafe::~Strafe() {

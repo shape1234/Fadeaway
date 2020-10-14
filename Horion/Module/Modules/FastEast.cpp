@@ -1,6 +1,7 @@
 #include "FastEat.h"
 
 FastEat::FastEat() : IModule(0x0, Category::PLAYER, "Eat food almost instant") {
+	registerIntSetting("speed", &this->dur, 1, 2, 31);
 }
 
 FastEat::~FastEat() {
@@ -16,7 +17,7 @@ void FastEat::onTick(C_GameMode* gm) {
 	for (int i = 0; i < 36; i++) {
 		C_ItemStack* stack = inv->getItemStack(i);
 		if (stack->item != NULL && (*stack->item)->itemId != 261 && (*stack->item)->duration == 32) {
-			(*stack->item)->setMaxUseDuration(5);
+			(*stack->item)->setMaxUseDuration(dur);
 		}
 	}
 }

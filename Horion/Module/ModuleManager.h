@@ -97,6 +97,7 @@
 #include "Modules/Strafe.h"
 #include "Modules/Switcher.h"
 #include "Modules/Longjump.h"
+#include "Modules/Twerk.h"
 
 #ifdef _DEBUG
 #include "Modules/PacketLogger.h"
