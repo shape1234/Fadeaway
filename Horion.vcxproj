@@ -364,6 +364,12 @@
     <ClCompile Include="Horion\Module\Modules\Switcher.cpp" />
     <ClCompile Include="Horion\Module\Modules\Longjump.cpp" />
     <ClCompile Include="Horion\Module\Modules\Twerk.cpp" />
+     <ClCompile Include="Horion\Module\Modules\NoClip.cpp" />
+     <ClCompile Include="Horion\Module\Modules\Mineplex.cpp" />
+     <ClCompile Include="Horion\Module\Modules\Emote.cpp" />
+     <ClCompile Include="Horion\Module\Modules\InsideTP.cpp" />
+     <ClCompile Include="Horion\Module\Modules\TestHack.cpp" />
+     <ClCompile Include="Horion\Module\Modules\CubeFly.cpp" />
     <ClCompile Include="Horion\path\goals\JoeGoal.cpp" />
     <ClCompile Include="Horion\path\goals\JoeGoalXYZ.cpp" />
     <ClCompile Include="Horion\path\goals\JoeGoalXZ.cpp" />
@@ -546,6 +552,12 @@
     <ClInclude Include="Horion\Module\Modules\Switcher.h" />
     <ClInclude Include="Horion\Module\Modules\Longjump.h" />
     <ClInclude Include="Horion\Module\Modules\Twerk.h" />
+    <ClInclude Include="Horion\Module\Modules\NoClip.h" />
+    <ClInclude Include="Horion\Module\Modules\Mineplex.h" />
+    <ClInclude Include="Horion\Module\Modules\Emote.h" />
+    <ClInclude Include="Horion\Module\Modules\InsideTP.h" />
+    <ClInclude Include="Horion\Module\Modules\TestHack.h" />
+    <ClInclude Include="Horion\Module\Modules\CubeFly.h" />
     <ClInclude Include="Horion\path\goals\JoeGoal.h" />
     <ClInclude Include="Horion\path\goals\JoeGoalXYZ.h" />
     <ClInclude Include="Horion\path\goals\JoeGoalXZ.h" />

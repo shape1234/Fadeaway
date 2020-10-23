@@ -105,6 +105,12 @@ void ModuleManager::initModules() {
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Switcher()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Longjump()));
 		this->moduleList.push_back(std::shared_ptr<IModule>(new Twerk()));
+		this->moduleList.push_back(std::shared_ptr<IModule>(new NoClip()));
+		this->moduleList.push_back(std::shared_ptr<IModule>(new Mineplex()));
+		this->moduleList.push_back(std::shared_ptr<IModule>(new Emote()));
+		this->moduleList.push_back(std::shared_ptr<IModule>(new TestHack()));
+		this->moduleList.push_back(std::shared_ptr<IModule>(new InsideTP()));
+		this->moduleList.push_back(std::shared_ptr<IModule>(new CubeFly()));
 
 		this->moduleList.push_back(std::shared_ptr<IModule>(new FollowPathModule()));
 

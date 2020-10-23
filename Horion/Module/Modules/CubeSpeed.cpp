@@ -1,6 +1,6 @@
 #include "CubeSpeed.h"
 
-CubeSpeed::CubeSpeed() : IModule('N', Category::MOVEMENT, "Speed bypass for CubeCraft") {
+CubeSpeed::CubeSpeed() : IModule(0x0, Category::MOVEMENT, "Speed bypass for CubeCraft") {
 	registerFloatSetting("speed", &this->speedMod, 1, 0.3f, 2.5f);
 	this->registerBoolSetting("Fly", &this->isBypass, this->isBypass);
 }

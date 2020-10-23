@@ -98,6 +98,12 @@
 #include "Modules/Switcher.h"
 #include "Modules/Longjump.h"
 #include "Modules/Twerk.h"
+#include "Modules/NoClip.h"
+#include "Modules/Mineplex.h"
+#include "Modules/Emote.h"
+#include "Modules/TestHack.h"
+#include "Modules/InsideTP.h"
+#include "Modules/CubeFly.h"
 
 #ifdef _DEBUG
 #include "Modules/PacketLogger.h"

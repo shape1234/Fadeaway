@@ -48,7 +48,7 @@ void HiveFly::onTick(C_GameMode* gm) {
 
 	float teleportX = 0.0f;
 	float teleportZ = 0.0f;
-	float teleportY = 0.003f;
+	float teleportY = 0.45f;
 	C_MovePlayerPacket teleportPacket;
 
 	if (!isBypass) {
@@ -60,9 +60,8 @@ void HiveFly::onTick(C_GameMode* gm) {
 		gm->player->lerpMotion(moveVec);
 	} else {
 		delay++;
-		vec3_t pos = *g_Data.getLocalPlayer()->getPos();
-		teleportPacket = C_MovePlayerPacket(g_Data.getLocalPlayer(), vec3_t(pos.x - teleportX, pos.y - teleportY, pos.z - teleportZ));
-		g_Data.getClientInstance()->loopbackPacketSender->sendToServer(&teleportPacket);
+		C_MovePlayerPacket p(g_Data.getLocalPlayer(), *g_Data.getLocalPlayer()->getPos());
+		g_Data.getClientInstance()->loopbackPacketSender->sendToServer(&p);
 		vec3_t moveVec;
 		moveVec.x = cos(calcYaw) * speedMod;
 		moveVec.y = -0.001 * speedMod;
@@ -72,12 +71,12 @@ void HiveFly::onTick(C_GameMode* gm) {
 
 		if (delay >= 5) {
 			vec3_t pos = *g_Data.getLocalPlayer()->getPos();
-			teleportPacket = C_MovePlayerPacket(g_Data.getLocalPlayer(), vec3_t(pos.x, pos.y, pos.z));
+			teleportPacket = C_MovePlayerPacket(g_Data.getLocalPlayer(), vec3_t(pos.x, pos.y - teleportY, pos.z));
 			g_Data.getClientInstance()->loopbackPacketSender->sendToServer(&teleportPacket);
-			gm->player->onGround = true;
+			//gm->player->onGround = true;
 			vec3_t moveVec;
 			moveVec.x = cos(calcYaw) * speedMod;
-			moveVec.y = -0.001 * speedMod;
+			moveVec.y = 0.001 * speedMod;
 			moveVec.z = sin(calcYaw) * speedMod;
 
 			gm->player->lerpMotion(moveVec);

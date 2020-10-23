@@ -2,14 +2,14 @@
 #include "../../../Utils/Logger.h"
 #include "../../DrawUtils.h"
 
-TestModule::TestModule() : IModule(0, Category::MISC, "For testing purposes") {
+TestModule::TestModule() : IModule(0, Category::MISC, "Red ESP Line that Circles Players") {
 }
 
 TestModule::~TestModule() {
 }
 
 const char* TestModule::getModuleName() {
-	return "TestModule";
+	return "CircleLineESP";
 }
 
 bool TestModule::isFlashMode() {

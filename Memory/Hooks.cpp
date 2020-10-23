@@ -621,7 +621,7 @@ __int64 Hooks::RenderText(__int64 a1, C_MinecraftUIRenderContext* renderCtx) {
 
 					static std::string name = "Fadeaway";
 #ifdef _DEBUG
-					static std::string version = "B 0.9";
+					static std::string version = "B 0.10";
 #elif defined _BETA
 					static std::string version = "beta";
 #else
@@ -1119,6 +1119,12 @@ void Hooks::LoopbackPacketSender_sendToServer(C_LoopbackPacketSender* a, C_Packe
 	}
 
 	oFunc(a, packet);
+	static auto emoteMod = moduleMgr->getModule<Emote>();
+	if (emoteMod->isEnabled()) {
+		oFunc(a, packet);
+		oFunc(a, packet);
+		oFunc(a, packet);
+	}
 }
 
 float Hooks::LevelRendererPlayer_getFov(__int64 _this, float a2, bool a3) {

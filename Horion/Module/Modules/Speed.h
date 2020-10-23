@@ -5,6 +5,7 @@ class Speed : public IModule {
 private:
 	float origSpeed = 0;
 	float speed = 1.6f;
+	bool v2 = false;
 
 public:
 	Speed();
@@ -15,4 +16,5 @@ public:
 	virtual void onTick(C_GameMode* gm) override;
 	virtual void onEnable() override;
 	virtual void onDisable() override;
+	virtual void onMove(C_MoveInputHandler* input) override;
 };

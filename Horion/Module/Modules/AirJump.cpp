@@ -1,6 +1,6 @@
 #include "AirJump.h"
 
-AirJump::AirJump() : IModule('G', Category::MOVEMENT, "Jump even you're not on the ground") {
+AirJump::AirJump() : IModule(0x0, Category::MOVEMENT, "Jump even you're not on the ground") {
 }
 
 AirJump::~AirJump() {
